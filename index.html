@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--메타태그-->
+    <meta name="description" content="로아계산기">
+    <meta name="keywords" content="로아, 로스트아크, 로아계산기, 로스트아크계산기, 경매분배금, 마리샵, 보석변환, 치명신속계산, 예둔효율">
+    <meta name="author" content="연어덮밥밥덮어연">
+    <!--파비콘-->
+    <link rel="shortcut icon" href="./images/losanlogo.jpg" type="image/x-icon">
+    <style>
+
+        body{
+            background-color: #fff;
+            font-weight: 400;
+            font-size: 15px;
+            margin: 0%;
+        }
+        #bigtitle{
+            font-size: 100px;
+        }
+        h1{
+            text-align : center;
+            font-size : 10px;
+        }
+        .logoimg{
+            height : 100px;
+            width: 100px;
+        }
+        #topcon{
+            display : flex;
+            justify-content: center;
+        }
+        #botcon{
+            display : flex;
+            justify-content: center;
+        }
+        #soosoo, #mary, #jewel, #bitgap, #chisin, #yedoon{
+            height: 500px;
+            width: 500px;
+            box-sizing: border-box;
+            border: thick double #000;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 1000;
+        }
+        .smalltitle{
+            padding: 0%;
+            margin: 0%;
+            border: 0;
+            font-size: 40px;
+        }
+
+
+
+
+
+        .jewelimg{
+            height: 45px;
+            width: 45px;
+        }
+        .jewelresult{
+            margin-top: 60px;
+        }
+
+
+
+
+
+        footer{
+            padding-top: 100px;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+        }
+    </style>
+    <title>로산기</title>
+</head>
+<body>
+    
+    <h1>
+        <div id="bigtitle">로산기<img class = logoimg src="./images/losanlogo.jpg" alt="로산기로고"> </div> by 연어덮밥밥덮어연
+        <br>
+        구해진 값은 반올림이슈로 조금의 오차가 있을 수 있습니다.
+    
+    </h1>
+    
+    <container id="topcon"> 
+        <div id="soosoo">
+            <p class = smalltitle>경매최적화</p>
+            <br>
+            <label for="price">가격</label>
+            <input id="price" type="text" placeholder="전각 가격">
+            <br>
+            <input type="radio" value="4" name="soosoo" class="input2">4인
+            <input type="radio" value="8" name="soosoo" class="input2">8인
+
+            <br>
+            <input type="button" value="계산" class="result2">
+            <br>
+            <br>
+            <label for="recommandprice">추천입찰가</label>
+            <div class="soosooresult"></div>
+            <br>
+            <label for="maginoprice">마지노선</label>
+            <div class="soosooresult2"></div>
+            <script>
+                let $inputValue = document.getElementById("price");
+                let $result2 = document.querySelector(".result2");
+                let 라디오 = document.querySelectorAll(".input2");
+                let 결과창 = document.querySelector('.soosooresult');
+                let 결과창2 = document.querySelector('.soosooresult2');
+                라디오.forEach((item) => {
+                item.addEventListener('click',() => {
+                $result2.addEventListener("click", () => {
+                결과창.innerText = Math.round(parseInt($inputValue.value) * 0.95  *  (parseInt(item.value -1) / parseInt(item.value)) * 10 / 11)+'골드';
+                결과창2.innerText = Math.round(parseInt($inputValue.value) * 0.95  *  (parseInt(item.value -1) / parseInt(item.value)))+'골드';
+                })
+                })
+                })
+            </script>
+        </div>
+        
+        <div id="bitgap">
+            <p class = smalltitle>우편 or 보석으로 빚갚기</p>
+            <br>
+            <br>
+            <label for="bit">빚진 금액</label>
+            <input id="bit" type="text" placeholder="빚진 골드 입력">
+            <br>
+            <input type="button" value="계산" onclick="
+            let _bit = Number(document.getElementById('bit').value);
+            let _bitresult = document.getElementById('bitresult');
+            bitresult.innerText = Math.round((_bit*1.0527)*10)/10+'골드';
+            ">
+            <br>
+            <br>
+            <br>
+            <div id="bitresult"></div>
+        </div>
+        
+        
+        <div id="jewel">
+            <p class = smalltitle>보석변환 실링기대값</p>
+            <br>
+            <br>
+            <label for="jewel">보석레벨</label>
+            <input type="radio" value="9" name="jewel" class="input">7<img class = jewelimg src="./images/7lv.png" alt="7멸">
+            <input type="radio" value="15" name="jewel" class="input">8<img class = jewelimg src="./images/8lv.png" alt="8멸">
+            <input type="radio" value="21" name="jewel" class="input">9<img class = jewelimg src="./images/9lv.png" alt="9멸">
+            <input type="radio" value="34" name="jewel" class="input">10<img class = jewelimg src="./images/10lv.png" alt="10멸">
+            <br>
+            <br>
+            <label for="skillsoo">스킬의 수</label>
+            <input id="skillsoo" type="text" placeholder="보석에서 등장하는 스킬의 수">
+            <input type="button" value="계산" class="result">
+            <br>
+            <br>
+            <div class="jewelresult"></div>
+            <script>
+                let $radioSevenValue = document.querySelectorAll(".input");
+                let $skillsoo = document.querySelector("#skillsoo")
+                let $result  = document.querySelector(".result");
+
+                $radioSevenValue.forEach(item => {
+                item.addEventListener('click',() =>{
+                $result.addEventListener("click", () => {
+                document.querySelector(".jewelresult").innerText = item.value * $skillsoo.value+'만 실링';
+                })
+                })
+                })
+            </script>
+        </div>
+    </container>
+    
+    <container id="botcon">
+        
+        <div id="mary">
+            <p class = smalltitle>마리샵 vs 거래소 명파</p>
+            <label for="cry">크리스탈값</label>
+            <input id="cry" type="text" placeholder="화폐거래소기준 크리스탈 값">
+            <br>
+            <label for="mps">명파소</label>
+            <input id="mps" type="text" placeholder="거래소 명파주머니 소 값">
+            <br>
+            <label for="mpm">명파중</label>
+            <input id="mpm" type="text" placeholder="거래소 명파주머니 중 값">
+            <br>
+            <label for="mpl">명파대</label>
+            <input id="mpl" type="text" placeholder="거래소 명파주머니 대 값">
+            <br>
+            <input type="button" value="계산" onclick="
+            let _cry = Number(document.getElementById('cry').value);
+            let _mps = Number(document.getElementById('mps').value);
+            let _mpm = Number(document.getElementById('mpm').value);
+            let _mpl = Number(document.getElementById('mpl').value);
+            let _marympsresult = document.getElementById('marympsresult');
+            let _marymplresult = document.getElementById('marymplresult');
+            let _mpsresult = document.getElementById('mpsresult');
+            let _mpmresult = document.getElementById('mpmresult');
+            let _mplresult = document.getElementById('mplresult');
+            marympsresult.innerText = ('마리샵(소) ' + _cry / 95 * 194 / 20000 * 100 + '골드');
+            marymplresult.innerText = ('마리샵(대) ' + _cry / 95 * 291 / 30000 * 100 + '골드');
+            mpsresult.innerText = ('거래소(소) ' + _mps / 500 * 100 + '골드');
+            mpmresult.innerText = ('거래소(중) ' + _mpm / 1000 * 100 + '골드');
+            mplresult.innerText = ('거래소(대) ' + _mpl / 1500 * 100 + '골드');
+            ">
+            <br>
+            <label>100명파당 가격</label>
+            <br>
+            <br>
+            <div id="marympsresult"></div>
+            <div id="marymplresult"></div>
+            <div id="mpsresult"></div>
+            <div id="mpmresult"></div>
+            <div id="mplresult"></div>
+        </div>
+        
+        <div id="chisin">
+            <p class = smalltitle>치명, 신속 계산</p>
+            <section class="input">
+                <br>
+                <label for="chi">치명</label>
+                <input id="chi" type="text" placeholder="치명스탯 입력(숫자만)">
+                <br>
+
+                <label for="sin">신속</label>
+                <input id="sin" type="text" placeholder="신속스탯 입력(숫자만)">
+                <br>
+
+                <input type="button" value="계산" onclick="
+                let _chi = Number(document.getElementById('chi').value);
+                let _sin = Number(document.getElementById('sin').value);
+                let _chiresult = document.getElementById('chiresult');
+                let _sinresult1 = document.getElementById('sinresult1');
+                let _sinresult2 = document.getElementById('sinresult2');
+                _chiresult.value = Math.round((_chi*0.03579)*100)/100+'%';
+                _sinresult1.value = Math.round((_sin*0.01717)*100)/100+'%';
+                _sinresult2.value = Math.round((_sin*0.02147)*100)/100+'%';
+                ">
+            </section>
+            <br>
+            <section class="output">
+                <label for="chiresult">치명타</label>
+                <input id="chiresult" type="text">
+                <br>
+                <label for="sinresult1">공이속</label>
+                <input id="sinresult1" type="text">
+                <br>
+                <label for="sinresult2">쿨감소</label>
+                <input id="sinresult2" type="text">
+            </section>
+        </div>
+        
+        <div id="yedoon">
+            <p class = smalltitle>예둔효율 계산</p>
+            <br>
+            <section class="input">
+                <label for="cri">치적</label>
+                <input id="cri" type="text" placeholder="본인치적 입력(숫자만)">
+                <br>
+
+                <label for="dmg">치피</label>
+                <input id="dmg" type="text" placeholder="본인치피 입력(숫자만)">
+                <br>
+
+                <input type="button" value="계산" onclick="
+                let _cri = Number(document.getElementById('cri').value);
+                let _dmg = Number(document.getElementById('dmg').value);
+                let _result = document.getElementById('result');
+                _result.value = Math.round((((((_cri*(_dmg+50)/100)+(100-_cri))*0.98)/((_cri*_dmg/100)+(100-_cri))-1)*100)*100)/100+'%';
+                ">
+            </section>
+            <section class="output">
+                <label for="result">효율</label>
+                <input id="result" type="text">
+            </section>
+            <br>
+            <p class = smalltitle>돌대효율 계산</p>
+            <br>
+            <section class="input">
+                <label for="move">이속</label>
+                <input id="move" type="text" placeholder="본인이속 입력(숫자만)">
+                <br>
+                <input type="button" value="계산" onclick="
+                let _move = Number(document.getElementById('move').value);
+                let _moveresult = document.getElementById('moveresult');
+                _moveresult.value = Math.round(((_move-100) * 0.45)*100)/100+'%';
+                ">
+            </section>
+            <section class="output">
+                <label for="moveresult">효율</label>
+                <input id="moveresult" type="text">
+            </section>
+        
+        </div>
+    </container>
+</body>
+<footer>
+    <p>오류제보, 건의 : 디스코드 현우#7473 // 그림 : 김양똥</p>
+    <p>Copyrightⓒ 연어덮밥밥덮어연  All rights reserved.</p>
+</footer>
+</html>
